@@ -39,6 +39,12 @@ hunter_assert_not_empty_string("@CMAKE_GENERATOR@")
 hunter_assert_not_empty_string("${CMAKE_TOOLCHAIN_FILE}")
 hunter_assert_not_empty_string("@HUNTER_TLS_VERIFY@")
 
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
+
 if(IOS)
   if(CMAKE_VERSION VERSION_LESS 3.5)
     hunter_user_error("CMake 3.5+ version should be used for iOS toolchains")
